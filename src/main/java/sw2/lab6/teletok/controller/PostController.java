@@ -14,7 +14,7 @@ public class PostController {
 
     @GetMapping(value = {"", "/"})
     public String listPost(Model model){
-        model.addAttribute("listaPosts",postRepository.listarPostDescendentes());
+        model.addAttribute("listaPosts",postRepository.listaPostsQuery());
         return "post/list";
     }
 
