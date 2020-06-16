@@ -2,6 +2,7 @@ package sw2.lab6.teletok.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sw2.lab6.teletok.entity.Post;
@@ -41,7 +42,7 @@ public class PostController {
     }
 
     @PostMapping("/post/save")
-    public String savePost(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult, HttpSession session) {
+    public String savePost(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult, HttpSession session, Model model) {
 
         if(bindingResult.hasErrors()){
 
@@ -57,12 +58,11 @@ public class PostController {
                 return "/post/view";
             } else {
                 postRepository.save(post);
-                return "redirect:/";
+                return "redirect:";
             }
 
         }
 
-        return "redirect:/";
     }
 
     @GetMapping("/post/file/{media_url}")

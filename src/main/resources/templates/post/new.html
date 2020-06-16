@@ -13,8 +13,10 @@
                 <div class="card-body">
                     <form method="post" class="user" th:action="@{/post/save}" th:object="${post}">
                         <div class="form-group">
-                                <label for="media_url">regionid</label>
+                                <label for="media_url">Imagen</label>
                                 <input name="media_url" type="text" class="form-control" id="media_url">
+                                <div class="text-danger" th:if="${#fields.hasErrors('media_url')}" th:errors="*{media_url}">Error</div>
+
                         </div>
                         <div class="form-group">
                             <label for="description">Descripción</label>
