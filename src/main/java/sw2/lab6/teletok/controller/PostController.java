@@ -3,6 +3,11 @@ package sw2.lab6.teletok.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+<<<<<<< HEAD
+=======
+import org.springframework.web.bind.annotation.*;
+import sw2.lab6.teletok.repository.PostRepository;
+>>>>>>> d2c2d4e1ac028da36e4d3573fbc6cad2c68065b5
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sw2.lab6.teletok.entity.Post;
@@ -20,7 +25,6 @@ import java.util.Optional;
 @Controller
 public class PostController {
 
-    @Autowired
     PostCommentRepository postCommentRepository;
 
     @Autowired
@@ -30,10 +34,9 @@ public class PostController {
     PostRepository postRepository;
 
 
-
-
     @GetMapping(value = {"", "/"})
-    public String listPost(){
+    public String listPost(Model model){
+        model.addAttribute("listaPosts",postRepository.listaPostsQuery());
         return "post/list";
     }
 
@@ -43,7 +46,7 @@ public class PostController {
     }
 
     @PostMapping("/post/save")
-    public String savePost(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult, HttpSession session) {
+    public String savePost(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult, HttpSession session, Model model) {
 
         if(bindingResult.hasErrors()){
 
@@ -59,10 +62,14 @@ public class PostController {
                 return "/post/view";
             } else {
                 postRepository.save(post);
-                return "redirect:/";
+                return "redirect:";
             }
 
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2c2d4e1ac028da36e4d3573fbc6cad2c68065b5
     }
 
     @GetMapping("/post/file/{media_url}")
