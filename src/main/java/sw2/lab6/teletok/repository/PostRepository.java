@@ -1,5 +1,6 @@
 package sw2.lab6.teletok.repository;
 
+import javafx.geometry.Pos;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,13 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             "GROUP BY p.id\n" +
             "ORDER BY creation_date desc", nativeQuery=true)
     List<InformacionPostDto> listaPostsQuery();
+
+    @Query(value="SELECT p.id\n" +
+            "FROM post p\n" +
+            "INNER JOIN user u ON p.user_id=u.id\n" +
+            "WHERE p.description like %?1%\n" +
+            "OR u.username like %?1%", nativeQuery=true)
+    List<Post> buscadorPosts(String busqueda);
 
 
 }
