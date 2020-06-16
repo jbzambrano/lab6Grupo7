@@ -20,6 +20,7 @@ public class Post {
     @Column(name = "creation_date", nullable = false)
     private LocalDate creationDate;
     @Column(name = "media_url", nullable = false)
+    @Size(min=1, max = 3000, message = "Por favor suba un archivo")
     private String mediaUrl;
     @ManyToOne
     @JoinColumn(name = "user_id")

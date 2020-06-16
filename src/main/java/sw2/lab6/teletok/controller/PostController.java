@@ -3,8 +3,11 @@ package sw2.lab6.teletok.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+<<<<<<< HEAD
+=======
 import org.springframework.web.bind.annotation.*;
 import sw2.lab6.teletok.repository.PostRepository;
+>>>>>>> d2c2d4e1ac028da36e4d3573fbc6cad2c68065b5
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sw2.lab6.teletok.entity.Post;
@@ -17,6 +20,7 @@ import sw2.lab6.teletok.repository.PostRepository;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -37,7 +41,7 @@ public class PostController {
     }
 
     @GetMapping("/post/new")
-    public String newPost(){
+    public String newPost(@ModelAttribute("post") Post post){
         return "post/new";
     }
 
@@ -62,7 +66,10 @@ public class PostController {
             }
 
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> d2c2d4e1ac028da36e4d3573fbc6cad2c68065b5
     }
 
     @GetMapping("/post/file/{media_url}")
@@ -71,8 +78,23 @@ public class PostController {
     }
 
     @GetMapping("/post/{id}")
-    public String viewPost() {
-        return "post/view";
+    public String viewPost(@PathVariable("id") int idPost, Model model, HttpSession session) {
+
+        Optional <Post> optionalPost = postRepository.findById(idPost);
+
+        User user = (User) session.getAttribute("user");
+
+
+        if(optionalPost.isPresent()){
+
+            Post post = optionalPost.get();
+
+            model.addAttribute("post", post);
+            model.addAttribute("usu", user);
+            return "post/view";
+        }else{
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/post/comment")
