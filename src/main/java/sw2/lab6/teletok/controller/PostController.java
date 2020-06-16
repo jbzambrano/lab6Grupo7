@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sw2.lab6.teletok.repository.PostRepository;
+import org.springframework.web.bind.annotation.*;
+import sw2.lab6.teletok.repository.PostRepository;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sw2.lab6.teletok.entity.Post;
@@ -64,7 +66,6 @@ public class PostController {
             }
 
         }
-
     }
 
     @GetMapping("/post/file/{media_url}")
