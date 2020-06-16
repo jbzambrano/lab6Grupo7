@@ -2,6 +2,7 @@ package sw2.lab6.teletok.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sw2.lab6.teletok.entity.Post;
@@ -14,6 +15,7 @@ import sw2.lab6.teletok.repository.PostRepository;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -61,8 +63,6 @@ public class PostController {
             }
 
         }
-
-        return "redirect:/";
     }
 
     @GetMapping("/post/file/{media_url}")
@@ -71,8 +71,23 @@ public class PostController {
     }
 
     @GetMapping("/post/{id}")
-    public String viewPost() {
-        return "post/view";
+    public String viewPost(@PathVariable("id") int idPost, Model model, HttpSession session) {
+
+        Optional <Post> optionalPost = postRepository.findById(idPost);
+
+        User user = (User) session.getAttribute("user");
+
+
+        if(optionalPost.isPresent()){
+
+            Post post = optionalPost.get();
+
+            model.addAttribute("post", post);
+            model.addAttribute("usu", user);
+            return "post/view";
+        }else{
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/post/comment")
