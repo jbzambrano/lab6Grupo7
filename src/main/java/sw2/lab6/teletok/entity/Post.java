@@ -3,8 +3,8 @@ package sw2.lab6.teletok.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,7 +18,7 @@ public class Post {
     @Size(min=3, max = 45, message = "Debe contener entre 3 y 45 caracteres")
     private String description;
     @Column(name = "creation_date", nullable = false)
-    private Date creationDate;
+    private LocalDate creationDate;
     @Column(name = "media_url", nullable = false)
     private String mediaUrl;
     @ManyToOne
@@ -45,11 +45,11 @@ public class Post {
         this.description = description;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 

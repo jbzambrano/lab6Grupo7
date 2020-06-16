@@ -38,9 +38,9 @@
                             </div>
                         </li>
                     </ul>
-                    <form action="#" method="post">
+                    <form method="post" class="user" th:action="@{/post/comment}">
                         <div class="form-group">
-                            <textarea class="form-control"></textarea>
+                            <textarea name="postComment" class="form-control"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Enviar Comentario</button>
                     </form>
